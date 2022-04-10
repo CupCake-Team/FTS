@@ -10,12 +10,12 @@ label story_act1_begin(fridge='found only beer and dried fish', eatable=False, s
         menu:
             "{i}You take it quickly.{/i}"
             "Get ready for school.":
-                  pass
+                    pass
     else:
         menu:
-             "{i}You wouldn't eat any of these.{/i}"
-             "Get ready for school.":
-                  pass
+            "{i}You wouldn't eat any of these.{/i}"
+            "Get ready for school.":
+                pass
     scene bg natsuki_bedroom with wipeleft_scene
     menu:
         "{i}You packed up a bag and changed to school uniform.{/i}"
@@ -53,12 +53,12 @@ label story_act2_begin(fridge='found only beer and dried fish', eatable=False, s
         menu:
             "{i}You take it quickly.{/i}"
             "Try to get ready for school.":
-                  pass
+                pass
     else:
         menu:
-             "{i}You wouldn't eat any of these.{/i}"
-             "Try to get ready for school.":
-                  pass
+            "{i}You wouldn't eat any of these.{/i}"
+            "Try to get ready for school.":
+                pass
     scene bg natsuki_bedroom with wipeleft_scene
     menu:
         "{i}You packed up a bag and changed to school uniform.{/i}"
@@ -322,3 +322,28 @@ label story:
         "Try to go home.":
             pass
     call story_act2_end
+    call story_act2_begin pass (fridge='found that the amount of beer increased significantly')
+    "{i}You exchange poems with the rest of the club.{/i}"
+    menu:
+        "{i}You were most impressed with the new guy's poem.{/i}"
+        "Try to read the manga.":
+            pass
+    menu:
+        "{i}You went to the closet to read manga, when suddenly you found that your club leader had moved your manga to the top shelf.{/i}"
+        "Try to get and read the manga.":
+            "{i}Once you get the manga, you can finally read it.{/i}"
+    menu:
+        "{i}You have decided to read manga, when suddenly a guy interests in your hobby.{/i}"
+        "Try to discuss the manga with guy.":
+            pass
+    "{i}This manga was abou{nw}{/i}"
+    call story_transition_glitch
+    menu:
+        "{i}You discussed the manga with guy and were able to improve a friendship of sorts with him.{/i}"
+        "Trying to read a manga with guy.":
+            "{i}While reading the manga with the new guy, you got sick, which almost made you pass out, {w=1.0} but a snack bar thrown by the club leader was able to help you stay in line.{/i}"
+    menu:
+        "{i}The daily beatings from your father had a negative effect on your health.{/i}"
+        "Try to exchange poems.":
+            pass
+    call story_act1_end
