@@ -1,0 +1,35 @@
+name: RPA
+
+on: []
+#on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        locale: ['ru', 'en']
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+      - name: Install RPAtool
+        run: git clone https://github.com/Shizmob/rpatool.git ${{env.HOME}}/rpatool
+      - name: Preparing working folder
+        run: |
+          mv ./docs/USER_README.${{matrix.locale}}.txt ./README.txt
+          cp ./zz_story.${{matrix.locale}}.rpy ./zz_story.rpy
+          rm -rf docs
+          rm -rf zz_story.*.rpy
+      - name: Bundle into RPA
+        run: find . -mindepth 1 -maxdepth 1 -not -path './.*' -not -path './README.txt' | xargs python3 ${{env.HOME}}/rpatool/rpatool -c build.rpa
+      - name: Uploading build
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: |
+            *.rpa
+            README.txt
+          retention-days: 7
+
